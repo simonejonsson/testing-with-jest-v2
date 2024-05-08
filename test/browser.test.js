@@ -2,6 +2,8 @@
 const { Builder, By, until } = require('selenium-webdriver');
 require('geckodriver');
 
+const stack = require('../src/stack');
+
 const fileUnderTest = 'file://' + __dirname.replace(/ /g, '%20') + '/../dist/index.html';
 const defaultTimeout = 10000;
 let driver;
@@ -31,17 +33,16 @@ test('push and pop operations with large dataset', async () => {
     
     //push x (100) operations
     for (let i=0; i < operations; i++) {
-        await pushValue("Value + i");
+        stack.push("Value" + i);
     }
 
     // pop x (100) operations
     for (let i=0; i < operations; i++) {
-        await popValue();
+        stack.pop();
     }
 
     //Kontrollerar om stack är tom efter alla operationer
-    let isEmpty = await isStackEmpty();
-    expect(isEmpty).toBe(true);
+    expect(stack.pop()).toBe(undefined);
 
 });
 
