@@ -19,3 +19,10 @@ test('peek on stack with two or more elements returns the top element', () => {
     expect(stack.peek()).toBeDefined();
     expect(stack.peek()).toBe(42);
 });
+
+//Mitt test med jest || Kontrollerar vad som sker när pop används på en tom stack
+test('Pop on empty stack - returns undifined', () => {
+    stack = [];
+    expect(stack.pop()).toBeUndefined();
+
+});

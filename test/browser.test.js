@@ -1,4 +1,4 @@
-//importerar beroenden
+//importerar beroenden || selenium.test
 const { Builder, By, until } = require('selenium-webdriver');
 require('geckodriver');
 
@@ -19,9 +19,30 @@ afterAll(async() => {
     await driver.quit();
 }, defaultTimeout);
 
+//test från johan: kontrollerar om stacken är tom
 test('The stack should be empty in the beginning', async () => {
 	let stack = await driver.findElement(By.id('top_of_stack')).getText();
 	expect(stack).toEqual("n/a");
+});
+
+//mitt test med selenium || Kontrollerar om funktionen push och pop fungerar som de ska i utfall av 100 (operation kan justeras efter behov)
+test('push and pop operations with large dataset', async () => {
+    var operations = 100;
+    
+    //push x (100) operations
+    for (let i=0; i < operations; i++) {
+        await pushValue("Value + i");
+    }
+
+    // pop x (100) operations
+    for (let i=0; i < operations; i++) {
+        await popValue();
+    }
+
+    //Kontrollerar om stack är tom efter alla operationer
+    let isEmpty = await isStackEmpty();
+    expect(isEmpty).toBe(true);
+
 });
 
 describe('Clicking "Pusha till stacken"', () => {
