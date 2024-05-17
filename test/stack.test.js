@@ -1,3 +1,4 @@
+const { forEach } = require('underscore');
 const stack = require('../src/stack');
 
 //test 1 - undedined
@@ -22,6 +23,9 @@ test('peek on stack with two or more elements returns the top element', () => {
 
 //Mitt test med jest || Kontrollerar vad som sker när pop används på en tom stack
 test('Pop on empty stack - returns undefined', () => {
+    //rensar stack från tidigare test + pop på tom stack
+    stack.pop();
+    stack.pop();
     stack.pop();
     stack.pop();
     expect(stack.pop()).toBeUndefined();
